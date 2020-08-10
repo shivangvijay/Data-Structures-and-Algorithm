@@ -1,0 +1,29 @@
+"""
+Task: The goal in this problem is to find the minimum number of coins needed to change the input value(an integer) into coins with denomination
+1,5 and 10.
+
+Input Format: The input consists of a single integer m.
+
+Constraints. 1<=m<=10^3
+
+Output Format: Output the minimum number of coins with denominations 1,5,10 that changes m.
+"""
+
+#Greedy algorithm
+
+def money_change(m):
+  count = 0
+  while m>0:
+    if m>=10:
+      count = count + int((m-(m%10))/10)
+      m = m%10
+    elif m>=5:
+      count = count + int((m-(m%5))/5)
+      m = m%5
+    else:
+      count = count + m
+      m = 0
+  return count
+    
+m=int(input())
+print(money_change(m))
