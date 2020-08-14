@@ -1,0 +1,27 @@
+"""
+We taking one constraint that element is present in the list.
+"""
+
+import math
+import sys
+def binary_search(a,low,high,to_find):
+    mid = math.floor(low+(high-low)/2)
+    while a[mid]!=to_find:
+      mid = math.floor(low+(high-low)/2)
+      if a[mid] < to_find:
+          low = mid
+          binary_search(a,low,high,to_find)
+          #print()
+      elif a[mid] > to_find:
+          high = mid
+          binary_search(a,low,high,to_find)
+          #print("elif")
+    return mid
+
+random = list(map(int,(sys.stdin.readline()).split()))
+high = random[0] - 1
+low = 0
+a = random[1:]
+to_find = int(input())
+
+print(binary_search(a,low,high,to_find))
