@@ -14,42 +14,60 @@ public:
     int deleteEle(int arr[], int n, int x);
 
     /**
-     * @brief 
-     * 
-     * @param arr 
-     * @param n 
-     * @return int 
+     * @brief
+     *
+     * @param arr
+     * @param n
+     * @return int
      */
     int largestEle(int arr[], int n);
 
     // int largestElement(int arr[]);
 
     /**
-     * @brief 
-     * 
-     * @param arr 
-     * @param n 
+     * @brief
+     *
+     * @param arr
+     * @param n
      * @return index of second largest element
      */
     int secondLargestIndex(int arr[], int n);
 
     /**
-     * @brief 
-     * 
-     * @param arr 
-     * @param n 
-     * @return true 
-     * @return false 
+     * @brief
+     *
+     * @param arr
+     * @param n
+     * @return true
+     * @return false
      */
     bool isSorted(int arr[], int n);
 
     /**
-     * @brief 
-     * 
-     * @param arr 
-     * @param n 
+     * @brief
+     *
+     * @param arr
+     * @param n
      */
     void reverseArray(int arr[], int n);
+
+    /**
+     * @brief
+     *
+     * @param arr
+     * @param n
+     * @return true
+     * @return false
+     */
+    void moveZeroToEnd(int arr[], int n);
+
+    /**
+     * @brief
+     *
+     * @param arr
+     * @param n
+     */
+    void leftRotate(int arr[], int n);
 };
 
 int Array::deleteEle(int arr[], int n, int x)
@@ -76,10 +94,10 @@ int Array::deleteEle(int arr[], int n, int x)
 int Array::largestEle(int arr[], int n)
 {
     int max = 0;
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        if(arr[i]>max)
-            max=arr[i];
+        if (arr[i] > max)
+            max = arr[i];
     }
     return max;
 }
@@ -100,21 +118,21 @@ int Array::largestElement(int arr[])
 }
 **/
 
-//Time complexity is O(n) - Best solution.
+// Time complexity is O(n) - Best solution.
 int Array::secondLargestIndex(int arr[], int n)
 {
     int max = 0;
     int secondMax = -1;
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        if(arr[i] > arr[max])
+        if (arr[i] > arr[max])
         {
             secondMax = max;
             max = i;
         }
-        else if(arr[i] != arr[max])
+        else if (arr[i] != arr[max])
         {
-            if(secondMax == -1 || arr[i] > arr[secondMax])
+            if (secondMax == -1 || arr[i] > arr[secondMax])
             {
                 secondMax = i;
             }
@@ -125,9 +143,9 @@ int Array::secondLargestIndex(int arr[], int n)
 
 bool Array::isSorted(int arr[], int n)
 {
-    for(int i=0; i < n-1; i++)
+    for (int i = 0; i < n - 1; i++)
     {
-        if(arr[i] <= arr[i+1])
+        if (arr[i] <= arr[i + 1])
         {
             continue;
         }
@@ -157,8 +175,8 @@ void Array::reverseArray(int arr[], int n)
     //     arr[n-1-i] = temp;
     // }
     int low = 0;
-    int high = n-1;
-    while(low < high)
+    int high = n - 1;
+    while (low < high)
     {
         int temp = arr[low];
         arr[low] = arr[high];
@@ -168,13 +186,42 @@ void Array::reverseArray(int arr[], int n)
     }
 }
 
+// Important
+void Array::moveZeroToEnd(int arr[], int n)
+{
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] != 0)
+        {
+            std::swap(arr[i], arr[count]);
+            count++;
+        }
+    }
+}
+
+void Array::leftRotate(int arr[], int n)
+{
+    int start = arr[0];
+    for(int i=0; i<n-1; i++)
+    {
+        arr[i]=arr[i+1];
+    }
+    arr[n-1] = start;
+}
+
 int main()
 {
-    int arr[] = {10,19,45,20,23,78};
-    int testcase[] = {2,3,4,5,5,3,6};
+    int arr[] = {10, 19, 45, 20, 23, 78};
+    int testcase[] = {2, 3, 4, 5, 5, 3, 6};
     Array arrObj;
-    std::cout << "Checking of larget Element in arr " << arrObj.largestEle(arr,(sizeof(arr)/sizeof(arr[0]))) << std::endl;
+    std::cout << "Checking of larget Element in arr " << arrObj.largestEle(arr, (sizeof(arr) / sizeof(arr[0]))) << std::endl;
     // std::cout << "Checking of larget Element in arr without n" << arrObj.largestElement(arr) << std::endl; //not give desired result
-    std::cout << "SecondLargetIndex " << arrObj.secondLargestIndex(testcase,(sizeof(testcase)/sizeof(testcase[0]))) << std::endl;
-    std::cout << "isSorted " << arrObj.isSorted(testcase,(sizeof(testcase)/sizeof(testcase[0]))) << std::endl;
+    std::cout << "SecondLargetIndex " << arrObj.secondLargestIndex(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
+    std::cout << "isSorted " << arrObj.isSorted(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
+    arrObj.leftRotate(testcase,sizeof(testcase) / sizeof(testcase[0]));
+    for(int i=0; i<7; i++)
+    {
+        std::cout << testcase[i] << " ";
+    }
 }
