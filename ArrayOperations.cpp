@@ -68,6 +68,15 @@ public:
      * @param n
      */
     void leftRotate(int arr[], int n);
+
+    /**
+     * @brief 
+     * 
+     * @param arr 
+     * @param n 
+     * @param D 
+     */
+    void leftRotateDplace(int arr[], int n, int D);
 };
 
 int Array::deleteEle(int arr[], int n, int x)
@@ -210,6 +219,29 @@ void Array::leftRotate(int arr[], int n)
     arr[n-1] = start;
 }
 
+// if D > n then take factor of division.
+// There are other 3 more methods in which 2 are more efficent. Look on it
+void Array::leftRotateDplace(int arr[], int n, int D)
+{
+    int tempArr[n] = {0};
+    for(int i=0; i<n; i++)
+    {
+        if(i<D)
+        {
+            tempArr[n+(i-D)] = arr[i];
+        }
+        else
+        {
+            tempArr[i-D] = arr[i];
+        }
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        arr[i] = tempArr[i];
+    }
+}
+
 int main()
 {
     int arr[] = {10, 19, 45, 20, 23, 78};
@@ -219,7 +251,7 @@ int main()
     // std::cout << "Checking of larget Element in arr without n" << arrObj.largestElement(arr) << std::endl; //not give desired result
     std::cout << "SecondLargetIndex " << arrObj.secondLargestIndex(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
     std::cout << "isSorted " << arrObj.isSorted(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
-    arrObj.leftRotate(testcase,sizeof(testcase) / sizeof(testcase[0]));
+    arrObj.leftRotateDplace(testcase,sizeof(testcase) / sizeof(testcase[0]),3);
     for(int i=0; i<7; i++)
     {
         std::cout << testcase[i] << " ";
