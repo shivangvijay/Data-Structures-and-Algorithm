@@ -94,6 +94,14 @@ public:
      * @param n 
      */
     void leader2(int arr[], int n);
+
+    /**
+     * @brief 
+     * 
+     * @param arr 
+     * @param n 
+     */
+    void frequency(int arr[], int n);
 };
 
 int Array::deleteEle(int arr[], int n, int x)
@@ -294,11 +302,33 @@ void Array::leader2(int arr[], int n)
     }
 }
 
+// Given:- array is sorted
+void Array::frequency(int arr[], int n)
+{
+    int count = 1;
+    for(int i=1; i<n; i++)
+    {
+        if(arr[i]==arr[i-1])
+        {
+            count++;
+        }
+        else
+        {
+            std::cout << "Frequency " << arr[i-1] << " " << count << std::endl;
+            count = 1;
+        }
+        if(i == n-1)
+        {
+            std::cout << "Frequency " << arr[n-1] << " " << count << std::endl;
+        }
+    }
+}
+
 int main()
 {
     int arr[] = {10, 19, 45, 20, 23, 78};
     int testcase[] = {2,11, 3, 10, 4, 5, 5, 3, 6};
-    int testcase2[] = {2,11, 3, 10, 4, 5, 5, 3, 6};
+    int testcase2[] = {4, 5, 6};
 
     Array arrObj;
     std::cout << "Checking of larget Element in arr " << arrObj.largestEle(arr, (sizeof(arr) / sizeof(arr[0]))) << std::endl;
@@ -312,4 +342,6 @@ int main()
     }
     std::cout << std::endl;
     arrObj.leader2(testcase2,sizeof(testcase2) / sizeof(testcase2[0]));
+    std::cout << std::endl;
+    arrObj.frequency(testcase2,sizeof(testcase2) / sizeof(testcase2[0]));
 }
