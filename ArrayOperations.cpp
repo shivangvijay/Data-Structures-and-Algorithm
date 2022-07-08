@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 class Array
 {
@@ -77,6 +78,22 @@ public:
      * @param D 
      */
     void leftRotateDplace(int arr[], int n, int D);
+
+    /**
+     * @brief 
+     * 
+     * @param arr 
+     * @param n 
+     */
+    void leader(int arr[], int n);
+
+    /**
+     * @brief 
+     * 
+     * @param arr 
+     * @param n 
+     */
+    void leader2(int arr[], int n);
 };
 
 int Array::deleteEle(int arr[], int n, int x)
@@ -242,18 +259,57 @@ void Array::leftRotateDplace(int arr[], int n, int D)
     }
 }
 
+//this method requires thetha(n^2)
+void Array::leader(int arr[], int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        int j; //one flag method too is there.
+        for(j=i+1; j<n; j++)
+        {
+            if(arr[i]<=arr[j])
+            {
+                break;
+            }
+        }
+        if(j==n)
+        {
+            std::cout << arr[i] << " ";
+        }
+    }
+} 
+
+//this method requires thetha(n)
+void Array::leader2(int arr[], int n)
+{
+    int leaderHead = arr[n-1];
+    std::cout << arr[n-1] << " ";
+    for(int i = n-2; i>0; i--)
+    {
+        if(arr[i]>leaderHead)
+        {
+            std::cout << arr[i] << " ";
+            leaderHead = arr[i];
+        }
+    }
+}
+
 int main()
 {
     int arr[] = {10, 19, 45, 20, 23, 78};
-    int testcase[] = {2, 3, 4, 5, 5, 3, 6};
+    int testcase[] = {2,11, 3, 10, 4, 5, 5, 3, 6};
+    int testcase2[] = {2,11, 3, 10, 4, 5, 5, 3, 6};
+
     Array arrObj;
     std::cout << "Checking of larget Element in arr " << arrObj.largestEle(arr, (sizeof(arr) / sizeof(arr[0]))) << std::endl;
     // std::cout << "Checking of larget Element in arr without n" << arrObj.largestElement(arr) << std::endl; //not give desired result
     std::cout << "SecondLargetIndex " << arrObj.secondLargestIndex(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
     std::cout << "isSorted " << arrObj.isSorted(testcase, (sizeof(testcase) / sizeof(testcase[0]))) << std::endl;
     arrObj.leftRotateDplace(testcase,sizeof(testcase) / sizeof(testcase[0]),3);
-    for(int i=0; i<7; i++)
+    for(int i=0; i<sizeof(testcase) / sizeof(testcase[0]); i++)
     {
         std::cout << testcase[i] << " ";
     }
+    std::cout << std::endl;
+    arrObj.leader2(testcase2,sizeof(testcase2) / sizeof(testcase2[0]));
 }
