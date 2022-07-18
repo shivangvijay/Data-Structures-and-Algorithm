@@ -57,6 +57,39 @@ Node *insertEnd(Node *head, int x)
     return head;
 }
 
+Node *deleteStart(Node *head)
+{
+    if(head == NULL)
+    {
+        return NULL;
+    }
+    Node *newHead = head->next;
+    delete head;
+    return newHead;
+}
+
+Node* deleteTail(Node *head)
+{
+    if(head == NULL)
+    {
+        return NULL;
+    }
+    if(head->next == NULL)
+    {
+        delete head;
+        return NULL;
+    }
+
+    Node *curr = head;
+    while(curr->next->next != NULL)
+    {
+        curr = curr->next;
+    }
+    delete curr->next;
+    curr->next = NULL;
+    return head;
+}
+
 int main(){
     Node *head = new Node(10);
     head->next = new Node(11);
@@ -66,5 +99,8 @@ int main(){
     head = insertEnd(head,99);
     Node *head2 = NULL;
     head2 = insertEnd(head2,189);
+    head = deleteStart(head);
+    head = deleteTail(head);
+    head = deleteTail(head);
     traverse(head);
 }
