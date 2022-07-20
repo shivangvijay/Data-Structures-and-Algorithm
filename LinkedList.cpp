@@ -98,7 +98,7 @@ Node* insertAtPosition(Node* head, int position, int value)
         newHead->next = head;
         return newHead;
     }
-    int count = ;
+    int count = 1;
     Node* node = new Node(value);
     Node* curr = head;
     while(curr != NULL)
@@ -120,6 +120,31 @@ Node* insertAtPosition(Node* head, int position, int value)
     return head;
 }
 
+//itr solution is also available but better solution is iterative one only
+int SearchItr(Node* head, int x)
+{
+    int count = 1;
+    while(head != NULL)
+    {
+        if(head->value == x)
+        {
+            return count;
+        }
+        head = head->next;
+        count++;
+    }
+    return -1;
+}
+
+// int SearchItr(Node* head, int x)
+// {
+//     if(head->value == x)
+//     {
+//         return 
+//     }
+//     SearchItr(head->next,x);
+// }
+
 int main(){
     Node *head = new Node(10);
     head->next = new Node(11);
@@ -135,6 +160,7 @@ int main(){
     head = insertEnd(head,45);
     head = insertEnd(head,50);
     head = insertEnd(head,55);
-    head = insertAtPosition(head,-1,20);
+    head = insertAtPosition(head,2,20);
     traverse(head);
+    std::cout << "Searched Itr " << SearchItr(head,100) << std::endl;
 }
