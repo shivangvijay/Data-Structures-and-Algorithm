@@ -77,8 +77,26 @@ int trailingZerosInFactorial(int n)
 
 }
 
+// gcd(x,y) == gcd(x-y,y) , y is smaller
+int GCD(int x, int y)
+{
+  int k = -1;
+  k = std::min(x, y);
+  x = std::max(x, y);
+  y = k;
+
+  while (x != y) {
+    k = std::min(x, y);
+    x = std::max(x, y);
+    x = x - k;
+    y = k;
+  }
+
+  return x;
+}
+
 int main()
 {
-  int test1 = trailingZerosInFactorial(100);
+  int test1 = GCD(18, 3);
   std::cout << test1 << std::endl;
 }
