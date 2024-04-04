@@ -1,34 +1,34 @@
-#include "iostream"
+#include <iostream>
+#include <cmath>
 
 // count length
 int countLength(int x)
 {
-    int count = 0;
+  int count = 0;
 
-    while(x > 0)
-    {
-        count++;
-        x = x/10;
-    }
-    return count;
+  while (x > 0) {
+    count++;
+    x = x / 10;
+  }
+  return count;
 }
 
 
 bool isPalindrone(int x)
 {
-    int rev = 0;
-    int original_number = x;
+  int rev = 0;
+  int original_number = x;
 
-    while(x > 0)
-    {
-        int num = x%10;
-        x = x/10;
-        rev = rev * 10 + num;
-    }
+  while (x > 0) {
+    int num = x % 10;
+    x = x / 10;
+    rev = rev * 10 + num;
+  }
 
-    if(original_number == rev)
-        return true;
-    return false;
+  if (original_number == rev) {
+    return true;
+  }
+  return false;
 }
 
 /*------ Iterative solution------------
@@ -37,14 +37,13 @@ Auxiliary space complexity:- Thetha(1)
 This solution is good than recursive solution */
 int factorial(int x)
 {
-    int result = 1;
+  int result = 1;
 
-    while(x>1)
-    {
-        result = result * x;
-        x = x - 1;
-    }
-    return result;
+  while (x > 1) {
+    result = result * x;
+    x = x - 1;
+  }
+  return result;
 }
 
 
@@ -54,14 +53,32 @@ Auxiliary space complexity:- Thetha(n)
 This solution is bad than Iterative solution */
 int factorialRecursive(int x)
 {
-    if (x == 0)
-        return 1;   
-    return (x * factorialRecursive(x-1));
+  if (x == 0) {
+    return 1;
+  }
+  return x * factorialRecursive(x - 1);
+}
+
+/* No Over flow issues, Also below is mine solution,
+Please look website to look greeks for greeks solution.
+Time complexity is O(logn)*/
+int trailingZerosInFactorial(int n)
+{
+  int k = -1;
+  int count = 0;
+  int loop_count = 1;
+  while (k != 0) {
+    k = n / pow(5, loop_count);
+    count = count + k;
+    loop_count = loop_count + 1;
+  }
+
+  return count;
+
 }
 
 int main()
 {
-    int test1 = factorialRecursive(6);
-    std::cout << test1 << std::endl;
-
+  int test1 = trailingZerosInFactorial(100);
+  std::cout << test1 << std::endl;
 }
