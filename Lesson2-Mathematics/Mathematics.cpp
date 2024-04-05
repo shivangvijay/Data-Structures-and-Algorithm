@@ -78,6 +78,7 @@ int trailingZerosInFactorial(int n)
 }
 
 // gcd(x,y) == gcd(x-y,y) , y is smaller
+// Below is my implementation
 int GCD(int x, int y)
 {
   int k = -1;
@@ -95,8 +96,29 @@ int GCD(int x, int y)
   return x;
 }
 
+int gcdGreek(int x, int y)
+{
+  while (x != y) {
+    if (x > y) {
+      x = x - y;
+    } else {
+      y = y - x;
+    }
+  }
+  return x;
+}
+
+int optimizedGCD(int x, int y)
+{
+  if (y == 0) {
+    return x;
+  }
+  return optimizedGCD(y, x % y);
+}
+
+
 int main()
 {
-  int test1 = GCD(18, 3);
+  int test1 = optimizedGCD(24, 18);
   std::cout << test1 << std::endl;
 }
