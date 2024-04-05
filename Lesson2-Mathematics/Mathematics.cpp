@@ -108,6 +108,7 @@ int gcdGreek(int x, int y)
   return x;
 }
 
+// time complexity is log(min(x,y)), better than above GCD methods
 int optimizedGCD(int x, int y)
 {
   if (y == 0) {
@@ -117,8 +118,28 @@ int optimizedGCD(int x, int y)
 }
 
 
+// Time Complexity is O(sqrt(a))
+// we can make it more efficient by checking that number is divisible by 2 and 3 in statrting
+// and increment the loop by (+6) and start with 5. [Check website]
+bool isPrime(int a)
+{
+
+  if (a == 1) {
+    return false;
+  }
+
+  int sqrt_a = sqrt(a);
+  for (int i = 2; i <= sqrt_a; i++) {
+    if (a % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
 int main()
 {
-  int test1 = optimizedGCD(24, 18);
+  bool test1 = isPrime(1);
   std::cout << test1 << std::endl;
 }
