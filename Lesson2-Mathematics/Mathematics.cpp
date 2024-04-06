@@ -137,9 +137,51 @@ bool isPrime(int a)
   return true;
 }
 
+// prime factors - efficient method
+// my method
+void primeFactors(int a)
+{
+  int sqrt_a = sqrt(a);
+  for (int i = 2; i <= sqrt_a; i++) {
+    if (a == 1) {
+      break;
+    }
+    if (isPrime(i)) {    // No need of it.
+      while (a % i == 0) {
+        std::cout << i << std::endl;
+        a = a / i;
+        if (isPrime(a)) {
+          std::cout << a << std::endl;
+        }
+      }
+    }
+  }
+}
+
+// Time Complexity is O(sqrt(a))
+// we can make it more efficient by checking that number is divisible by 2 and 3 in statrting
+// and increment the loop by (+6) and start with 5. [Check website]
+void primeFactorsGreek(int a)
+{
+  if (a == 1) {
+    return;
+  }
+
+  int sqrt_a = sqrt(a);
+  for (int i = 2; i <= sqrt_a; i++) {
+    while (a % i == 0) {
+      std::cout << i << std::endl;
+      a = a / i;
+    }
+  }
+  if (a > 1) {
+    std::cout << a << std::endl;
+  }
+}
+
 
 int main()
 {
-  bool test1 = isPrime(1);
-  std::cout << test1 << std::endl;
+  primeFactorsGreek(20);
+//   std::cout << test1 << std::endl;
 }
