@@ -179,9 +179,32 @@ void primeFactorsGreek(int a)
   }
 }
 
+// Time Complexity is O(sqrt(a))
+// check for sorted order print of divisor, you need two loop on addition.
+void divisor(int a)
+{
+  for (int i = 1; i * i <= a; i++) {
+    if (a % i == 0) {
+      std::cout << i << std::endl;
+      if (i != a / i) {
+        std::cout << a / i << std::endl;
+      }
+    }
+  }
+}
+
+
+// H.W write both Iterative and Recursive solution with O(log(n))
+int power(int a, int b)
+{
+  if (b % 2 == 0) {
+    return power(a, b / 2)
+  }
+}
+
 
 int main()
 {
-  primeFactorsGreek(20);
+  divisor(25);
 //   std::cout << test1 << std::endl;
 }
