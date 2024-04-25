@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-
+#include <string.h>
 
 // tail recursion
 void printNto1(int n)
@@ -40,8 +40,32 @@ int nFibNumber(int n)
   return nFibNumber(n - 1) + nFibNumber(n - 2);
 }
 
+int sumOfNaturalNumber(int n)
+{
+  if (n == 0) {
+    return 0;
+  }
+  return n + sumOfNaturalNumber(n - 1);
+}
+
+int sumOfDigits(int n, int k)
+{
+  if (n == 0) {
+    return k;
+  }
+  return sumOfDigits(n / 10, k + (n % 10));
+}
+
+int sumOfDigits(int n)
+{
+  if (n == 0) {
+    return 0;
+  }
+  return sumOfDigits(n / 10) + (n % 10);
+}
+
 int main()
 {
-  int k = nFibNumber(5);
+  int k = sumOfDigits(14311234);
   std::cout << k << std::endl;
 }
